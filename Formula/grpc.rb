@@ -18,7 +18,7 @@ class Grpc < Formula
   end
 
   def install
-    system "make", "install"
+    system "make", "prefix=#{prefix} install"
   end
 
   test do
