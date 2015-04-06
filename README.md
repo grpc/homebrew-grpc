@@ -28,6 +28,3 @@ Docs
 [wiki]:http://wiki.github.com/Homebrew/homebrew
 [homebrew]:http://brew.sh
 [linuxbrew]:https://github.com/Homebrew/linuxbrew
-=======
-# homebrew-grpc
-gRPC formulae repo for Homebrew
