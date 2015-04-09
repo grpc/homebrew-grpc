@@ -10,7 +10,7 @@ class Grpc < Formula
 
   depends_on "protobuf"
   depends_on "openssl"
-  depends_on "pkg-config"  # not always available on linux
+  depends_on "pkg-config" => :build
 
   devel do
     url "https://github.com/grpc/grpc/archive/release-0_6_0.tar.gz"
