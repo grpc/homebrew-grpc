@@ -5,7 +5,8 @@ class Grpc < Formula
   homepage "http://www.grpc.io/"
   head "https://github.com/grpc/grpc.git"
   url "https://github.com/grpc/grpc/archive/release-0_6_0.tar.gz"
-  sha256 "9c548b4ed2dd3dad7de26633a37cf1342b5f7edb51f66623bbbe3a26306580e3"
+  version "0.6.0"
+  sha256 "0671c8b264bd0b087b7699da24b4251fb998657ceb516aa672419aa709f6fb19"
 
   depends_on "protobuf"
   depends_on "openssl"
