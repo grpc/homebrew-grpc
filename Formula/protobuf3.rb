@@ -2,18 +2,11 @@ class Protobuf3 < Formula
   homepage "https://github.com/google/protobuf/"
   url "https://github.com/google/protobuf/archive/v3.0.0-alpha-2.tar.gz"
   sha256 "46df8649e2a0ce736e37f8f347f92b32a9b8b54d672bf60bd8f6f4d24d283390"
+  version "3.0.0-alpha-2"
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "libtool" => :build
-
-  bottle do
-    cellar :any
-    revision 1
-    sha1 "fa7019a4ee16a4bdf0c653dc3fd932dc5a7e1e3b" => :yosemite
-    sha1 "f3ba19bdabe4994c7c69d05897a52be8b13117bf" => :mavericks
-    sha1 "9239ad264a7327cc90d1d3ddb26a27a4de10527f" => :mountain_lion
-  end
 
   # this will double the build time approximately if enabled
   option "with-check", "Run build-time check"
