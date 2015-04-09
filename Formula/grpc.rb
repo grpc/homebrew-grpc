@@ -7,7 +7,7 @@ class Grpc < Formula
   url "https://github.com/grpc/grpc/archive/release-0_6_0.tar.gz"
   sha256 "9c548b4ed2dd3dad7de26633a37cf1342b5f7edb51f66623bbbe3a26306580e3"
 
-  depends_on "protobuf3"
+  depends_on "protobuf"
   depends_on "openssl"
 
   devel do
