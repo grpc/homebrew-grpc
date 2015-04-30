@@ -4,7 +4,7 @@
 #
 # prerequisites: Homebrew(Mac), Linuxbrew(Linux) is installed.
 #
-# Usage: $(curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/scripts/install_grpc.sh) | bash -
+# Usage: curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install_grpc.sh | bash -
 
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
@@ -27,6 +27,15 @@ __grpc_install_with_brew() {
         brew install openssl
     else
         brew install openssl
+    fi
+
+    # On linux, explicitly install  unzip if it's not present, it's a protobuf dependency
+    # TODO: add this to the official homebrew formula
+    if [ "$(uname)" != "Darwin" ]; then
+        which 'unzip' >> /dev/null || {
+            brew tap homebrew/dupes
+            brew install unzip
+        }
     fi
 
     # Explicitly install protobuf.
