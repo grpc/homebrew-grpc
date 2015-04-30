@@ -2,23 +2,23 @@
 #
 # Installs gRPC in a Homebrew or Linuxbrew installation.
 #
-# Prerequisites: Homebrew(Mac), Linuxbrew(Linux) is installed.
-#  - install homebrew: http://brew.sh
-#  - install linuxbrew: https://github.com/Homebrew/linuxbrew#installation
+# Prerequisites: Homebrew(Mac) / Linuxbrew(Linux) is installed.
+#  - to install homebrew: see http://brew.sh
+#  - to install linuxbrew: https://github.com/Homebrew/linuxbrew#installation
 #
 # Usage:
 #
 # Install grpc core:
-#   curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -
+#   curl -fsSL https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install | bash -
 #
 # Install grpc ruby:
-#   curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -s ruby
+#   curl -fsSL https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install | bash -s ruby
 #
 # Install grpc nodejs:
-#   curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -s nodejs
+#   curl -fsSL https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install | bash -s nodejs
 #
 # Install grpc python:
-#   curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -s python
+#   curl -fsSL https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install | bash -s python
 
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
@@ -70,7 +70,7 @@ __grpc_install_with_brew() {
     __grpc_brew_install --devel protobuf
 
     # Install gRPC
-    brew tap tbetbetbe/grpc
+    brew tap grpc/grpc
     __grpc_brew_install --HEAD grpc
 }
 

@@ -11,14 +11,14 @@ Prequisites
 
 How do I install these formulae?
 --------------------------------
-Just `brew tap tbetbetbe/grpc` and then `brew install <formula>`.
+Just `brew tap grpc/grpc` and then `brew install <formula>`.
 
-If the formula conflicts with one from Homebrew/homebrew or another tap, you can `brew install tbetbetbe/grpc/<formula>`.
+If the formula conflicts with one from Homebrew/homebrew or another tap, you can `brew install grpc/grpc/<formula>`.
 
 You can also install via URL:
 
 ```
-brew install https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/<formula>.rb
+brew install https://raw.githubusercontent.com/grpc/homebrew-grpc/master/<formula>.rb
 ```
 
 Docs
