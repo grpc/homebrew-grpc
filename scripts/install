@@ -1,10 +1,24 @@
 #!/bin/bash
 #
-# Installs gRPC the core in an existing Homebrew or Linuxbrew installation.
+# Installs gRPC in a Homebrew or Linuxbrew installation.
 #
-# prerequisites: Homebrew(Mac), Linuxbrew(Linux) is installed.
+# Prerequisites: Homebrew(Mac), Linuxbrew(Linux) is installed.
+#  - install homebrew: http://brew.sh
+#  - install linuxbrew: https://github.com/Homebrew/linuxbrew#installation
 #
-# Usage: curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -
+# Usage:
+#
+# Install grpc core:
+#   curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -
+#
+# Install grpc ruby:
+#   curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -s ruby
+#
+# Install grpc nodejs:
+#   curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -s nodejs
+#
+# Install grpc python:
+#   curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -s python
 
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
@@ -18,7 +32,6 @@ __grpc_check_for_brew() {
         return 1;
     }
 }
-
 
 __grpc_brew_install() {
     local pkg=${!#}
@@ -94,7 +107,7 @@ __grpc_install_python_pkg() {
     }
     if [ "$(uname)" != "Darwin" ]; then
         # Linux brew; help npm find the grpc core.
-        CXXFLAGS=-I$HOME/.linuxbrew/include LDFLAGS=-L$HOME/.linuxbrew/lib pip install grpcio
+        CFLAGS=-I$HOME/.linuxbrew/include LDFLAGS=-L$HOME/.linuxbrew/lib pip install grpcio
     else
         pip install grpcio
     fi
