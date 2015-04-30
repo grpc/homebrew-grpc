@@ -87,10 +87,26 @@ __grpc_install_nodejs_pkg() {
     fi
 }
 
+
+__grpc_install_python_pkg() {
+    which 'pip' >> /dev/null || {
+        echo "Could not detect pip; is it (and python) installed properly? Please check $PATH and maybe install and try again";
+        return 1;
+    }
+    if [ "$(uname)" != "Darwin" ]; then
+        # Linux brew; help npm find the grpc core.
+        CXXFLAGS=-I$HOME/.linuxbrew/include LDFLAGS=-L$HOME/.linuxbrew/lib pip install grpcio
+    else
+        pip install grpcio
+    fi
+}
+
+
 # TODO: add __grpc_install_{php,python}_pkg
 
 __grpc_install_pkgs() {
-    for pkg in $@; do
+    local known_pkgs="ruby python nodejs"
+    for pkg in known_pkgs; do
         if [[ "$@" =~ "$pkg" ]]; then
             echo "installing grpc $pkg";
             local cmd="__grpc_install_${pkg}_pkg";
