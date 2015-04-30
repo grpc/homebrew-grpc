@@ -96,7 +96,7 @@ __grpc_install_nodejs_pkg() {
         # Linux brew; help npm find the grpc core.
         CXXFLAGS=-I$HOME/.linuxbrew/include LDFLAGS=-L$HOME/.linuxbrew/lib npm install grpc
     else
-        npm install grpc
+        npm install --global grpc
     fi
 }
 
