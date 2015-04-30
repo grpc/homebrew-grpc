@@ -87,7 +87,6 @@ __grpc_install_nodejs_pkg() {
     fi
 }
 
-
 __grpc_install_python_pkg() {
     which 'pip' >> /dev/null || {
         echo "Could not detect pip; is it (and python) installed properly? Please check $PATH and maybe install and try again";
@@ -101,8 +100,7 @@ __grpc_install_python_pkg() {
     fi
 }
 
-
-# TODO: add __grpc_install_{php,python}_pkg
+# TODO: add __grpc_install_php_pkg
 
 __grpc_install_pkgs() {
     local known_pkgs="ruby python nodejs"
@@ -111,6 +109,8 @@ __grpc_install_pkgs() {
             echo "installing grpc $pkg";
             local cmd="__grpc_install_${pkg}_pkg";
             $cmd;
+        else
+            echo "did not install package for ${pkg}; this what not known"
         fi
     done
 }
