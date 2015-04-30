@@ -4,7 +4,7 @@
 #
 # prerequisites: Homebrew(Mac), Linuxbrew(Linux) is installed.
 #
-# Usage: curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install_core | bash -
+# Usage: curl -fsSL https://raw.githubusercontent.com/tbetbetbe/homebrew-grpc/master/scripts/install | bash -
 
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
@@ -61,22 +61,48 @@ __grpc_install_with_brew() {
     __grpc_brew_install --HEAD grpc
 }
 
-__grpc_install_ruby() {
+__grpc_install_ruby_pkg() {
     which 'ruby' >> /dev/null || {
-        echo "Could not detect ruby; please install it or add to the PATH and try again";
+        echo "Could not detect ruby; is ruby installed properly? Please check $PATH and maybe install and try again";
         return 1;
     }
-    gem install grpc -- --with-grpc-dir=$HOME/.linuxbrew
+    if [ "$(uname)" != "Darwin" ]; then
+        # Linux brew; help gem find the grpc core.
+        gem install grpc -- --with-grpc-dir=$HOME/.linuxbrew
+    else
+        gem install grpc
+    fi
+}
+
+__grpc_install_nodejs_pkg() {
+    which 'npm' >> /dev/null || {
+        echo "Could not detect npm; is node installed properly? Please check $PATH and maybe install and try again";
+        return 1;
+    }
+    if [ "$(uname)" != "Darwin" ]; then
+        # Linux brew; help npm find the grpc core.
+        CXXFLAGS=-I$HOME/.linuxbrew/include LDFLAGS=-L$HOME/.linuxbrew/lib npm install grpc
+    else
+        npm install grpc
+    fi
+}
+
+# TODO: add __grpc_install_{php,python}_pkg
+
+__grpc_install_pkgs() {
+    for pkg in $@; do
+        if [[ "$@" =~ "$pkg" ]]; then
+            echo "installing grpc $pkg";
+            local cmd="__grpc_install_${pkg}_pkg";
+            $cmd;
+        fi
+    done
 }
 
 main() {
-    echo "Args were: $@";
     __grpc_check_for_brew || exit 1;
     __grpc_install_with_brew;
-    if [[ "$@" =~ 'ruby' ]]; then
-       echo "ruby required! ";
-       __grpc_install_ruby;
-    fi
+    __grpc_install_pkgs "$@";
 }
 
 main "$@"
