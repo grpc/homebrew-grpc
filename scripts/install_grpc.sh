@@ -19,14 +19,25 @@ __grpc_check_for_brew() {
     }
 }
 
+
+__grpc_brew_install() {
+    local pkg=${!#}
+    if brew list -1 | grep -q "^${pkg}\$"; then
+        echo "$pkg is already installed"
+        return;
+    else
+        brew install $@
+    fi
+}
+
 __grpc_install_with_brew() {
     # Explicitly install OpenSSL.
     if [ "$(uname)" != "Darwin" ]; then
         # there may be unresolved dependency issues installing openssl using linuxbrew on macs.
-        brew install pkg-config
-        brew install openssl
+        __grpc_brew_install pkg-config
+        __grpc_brew_install openssl
     else
-        brew install openssl
+        __grpc_brew_install openssl
     fi
 
     # On linux, explicitly install  unzip if it's not present, it's a protobuf dependency
@@ -34,7 +45,7 @@ __grpc_install_with_brew() {
     if [ "$(uname)" != "Darwin" ]; then
         which 'unzip' >> /dev/null || {
             brew tap homebrew/dupes
-            brew install unzip
+            __grpc_brew_install unzip
         }
     fi
 
@@ -43,11 +54,11 @@ __grpc_install_with_brew() {
     # We need the alpha version of protobuf, that's currently packaged a devel package, and
     # for new we're installing the head version of gRPC
     # install it explicitly.
-    brew install --devel protobuf
+    __grpc_brew_install --devel protobuf
 
     # Install gRPC
     brew tap tbetbetbe/grpc
-    brew install --HEAD grpc
+    __grpc_brew_install --HEAD grpc
 }
 
 main() {
