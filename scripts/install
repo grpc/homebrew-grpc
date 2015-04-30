@@ -104,7 +104,7 @@ __grpc_install_python_pkg() {
 
 __grpc_install_pkgs() {
     local known_pkgs="ruby python nodejs"
-    for pkg in known_pkgs; do
+    for pkg in $known_pkgs; do
         if [[ "$@" =~ "$pkg" ]]; then
             echo "installing grpc $pkg";
             local cmd="__grpc_install_${pkg}_pkg";
