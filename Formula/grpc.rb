@@ -12,9 +12,10 @@ class Grpc < Formula
   depends_on "openssl"
   depends_on "pkg-config" => :build
 
-  devel do
-    url "https://github.com/grpc/grpc/archive/release-0_6_0.tar.gz"
-    sha256 "9c548b4ed2dd3dad7de26633a37cf1342b5f7edb51f66623bbbe3a26306580e3"
+  bottle do
+    root_url "http://storage.googleapis.com/grpc-public/bottles"
+    sha256 "2a8b5d6f188c70b64dc3b2ba306483369b2b67d485b7fd06887b5126b128cc4d" => :yosemite
+    sha256 "a7cd10d66343f304600343733d47400a857356b03a22dc1dfbff91b5101463b0" => :x86_64_linux
   end
 
   def install
