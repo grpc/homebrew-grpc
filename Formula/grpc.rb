@@ -14,7 +14,7 @@ class Grpc < Formula
 
   bottle do
     root_url "http://storage.googleapis.com/grpc-public/bottles"
-    sha256 "2a8b5d6f188c70b64dc3b2ba306483369b2b67d485b7fd06887b5126b128cc4d" => :yosemite
+    sha256 "9e23cbcc4d4e9850cb608b66c44e76925f54c6d1f377dbeb64dd661c32eb67e4" => :yosemite
     sha256 "a7cd10d66343f304600343733d47400a857356b03a22dc1dfbff91b5101463b0" => :x86_64_linux
   end
 
