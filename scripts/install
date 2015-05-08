@@ -9,16 +9,16 @@
 # Usage:
 #
 # Install grpc core:
-#   curl -fsSL https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install | bash -
+#   curl -fsSL https://goo.gl/getgrpc | bash -
 #
 # Install grpc ruby:
-#   curl -fsSL https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install | bash -s ruby
+#   curl -fsSL https://goo.gl/getgrpc | bash -s ruby
 #
 # Install grpc nodejs:
-#   curl -fsSL https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install | bash -s nodejs
+#   curl -fsSL https://goo.gl/getgrpc | bash -s nodejs
 #
 # Install grpc python:
-#   curl -fsSL https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install | bash -s python
+#   curl -fsSL https://goo.gl/getgrpc | bash -s python
 
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
@@ -41,6 +41,11 @@ __grpc_brew_install() {
     else
         brew install $@
     fi
+}
+
+__grpc_brew_root() {
+    __grpc_check_for_brew || return 1;
+    brew config | grep HOMEBREW_PREFIX | cut -f 2 -d' '
 }
 
 __grpc_install_with_brew() {
@@ -79,12 +84,10 @@ __grpc_install_ruby_pkg() {
         echo "Could not detect ruby; is ruby installed properly? Please check $PATH and maybe install and try again";
         return 1;
     }
-    if [ "$(uname)" != "Darwin" ]; then
-        # Linux brew; help gem find the grpc core.
-        gem install grpc -- --with-grpc-dir=$HOME/.linuxbrew
-    else
-        gem install grpc
-    fi
+    # support custom install locations: that's the default for linuxbrew and may
+    # be used in homebrew install as well
+    local brew_root=$(__grpc_brew_root)
+    gem install grpc -- --with-grpc-dir=$brew_root
 }
 
 __grpc_install_nodejs_pkg() {
@@ -92,12 +95,10 @@ __grpc_install_nodejs_pkg() {
         echo "Could not detect npm; is node installed properly? Please check $PATH and maybe install and try again";
         return 1;
     }
-    if [ "$(uname)" != "Darwin" ]; then
-        # Linux brew; help npm find the grpc core.
-        CXXFLAGS=-I$HOME/.linuxbrew/include LDFLAGS=-L$HOME/.linuxbrew/lib npm install grpc
-    else
-        npm install --global grpc
-    fi
+    # support custom install locations: that's the default for linuxbrew and may
+    # be used in homebrew install as well
+    local brew_root=$(__grpc_brew_root)
+    CXXFLAGS=-I${brew_root}/include LDFLAGS=-L${brew_root}/lib npm install --global grpc
 }
 
 __grpc_install_python_pkg() {
@@ -105,12 +106,10 @@ __grpc_install_python_pkg() {
         echo "Could not detect pip; is it (and python) installed properly? Please check $PATH and maybe install and try again";
         return 1;
     }
-    if [ "$(uname)" != "Darwin" ]; then
-        # Linux brew; help npm find the grpc core.
-        CFLAGS=-I$HOME/.linuxbrew/include LDFLAGS=-L$HOME/.linuxbrew/lib pip install grpcio
-    else
-        pip install grpcio
-    fi
+    # support custom install locations, that's the default for linuxbrew and may
+    # be used in homebrew install as well
+    local brew_root=$(__grpc_brew_root)
+    CFLAGS=-I${brew_root}/include LDFLAGS=-L${brew_root}/lib pip install grpcio
 }
 
 # TODO: add __grpc_install_php_pkg
