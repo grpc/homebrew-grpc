@@ -1,19 +1,53 @@
 # gRPC Homebrew
 
-A centralized repository for gRPC brews.
-These simplify the installation of gRPC.
+This repo contains:
+- gRPC [homebrew][] formulae
+- A utility script that simplifies the install of other gRPC packages
 
-Prequisites
------------
+These simplify the installation of gRPC on Mac and Linux.
+
+The formulae will be maintained here rather than adding them to homebrew or
+linuxbrew repos directly until gRPC and protobuf 3.0 are GA, i.e, gRPC reaches
+1.0 and protobuf 3.0 is released.
+
+Prerequisites
+-------------
 
 - On Mac OS X, install [homebrew][].
 - On Linux, install [linuxbrew][].
 
-How do I install these formulae?
---------------------------------
+Quick Install
+-------------
+
+Thee repo contains [install script][] that can be used to install gRPC and
+optionally install the gRPC package for Python, Node.Js and/or Ruby once
+[homebrew][]/[linuxbrew][] is installed.  The installer is also available as a
+short alias https://goo.gl/getgrpc
+
+- To install the gRPC C core (this comes with gRPC protoc plugins for C++, Python and Ruby)
+```sh
+$ curl -fsSL https://goo.gl/getgrpc | bash -
+```
+- To install gRPC Python (it installs the gRPC C core if needed)
+```sh
+$ # This installs grpcio using pip install; you may want to activate [virtualenv][] before running this
+$ curl -fsSL https://goo.gl/getgrpc | bash -s python
+```
+- To install gRPC Node.js (it installs the gRPC C core if needed)
+```sh
+$ curl -fsSL https://goo.gl/getgrpc | bash -s nodejs
+```
+- To install gRPC Ruby (it installs the gRPC C core if needed)
+```sh
+$ curl -fsSL https://goo.gl/getgrpc | bash -s ruby
+```
+
+Using the formulae directly
+---------------------------
 Just `brew tap grpc/grpc` and then `brew install <formula>`.
 
-If the formula conflicts with one from Homebrew/homebrew or another tap, you can `brew install grpc/grpc/<formula>`.
+If this formula conflicts with one from Homebrew/homebrew or another tap, you
+can `brew install grpc/grpc/<formula>`.
 
 You can also install via URL:
 
@@ -28,3 +62,5 @@ Docs
 [wiki]:http://wiki.github.com/Homebrew/homebrew
 [homebrew]:http://brew.sh
 [linuxbrew]:https://github.com/Homebrew/linuxbrew
+[install script]:https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install
+[virtualenv]: https://virtualenv.pypa.io/en/latest/
