@@ -2,13 +2,11 @@
 
 This repo contains:
 - gRPC [homebrew][] formulae
-- A utility script that simplifies the install of other gRPC packages
+- A utility script that simplifies installation of other gRPC packages
 
-These simplify the installation of gRPC on Mac and Linux.
-
-The formulae will be maintained here rather than adding them to homebrew or
-linuxbrew repos directly until gRPC and protobuf 3.0 are GA, i.e, gRPC reaches
-1.0 and protobuf 3.0 is released.
+The formulae will be maintained here rather than adding them to the homebrew or
+linuxbrew repos until gRPC and protobuf 3.0 are generally available, i.e, gRPC
+reaches 1.0 and protobuf 3.0 is released.
 
 Prerequisites
 -------------
@@ -19,18 +17,21 @@ Prerequisites
 Quick Install
 -------------
 
-Thee repo contains [install script][] that can be used to install gRPC and
-optionally install the gRPC package for Python, Node.Js and/or Ruby once
-[homebrew][]/[linuxbrew][] is installed.  The installer is also available as a
-short alias https://goo.gl/getgrpc
+The repo contains an [install script][] that can be used to install gRPC and
+optionally install the gRPC package for Python, Node.Js and/or Ruby as long as
+[homebrew][]/[linuxbrew][] is available.
 
-- To install the gRPC C core (this comes with gRPC protoc plugins for C++, Python and Ruby)
+For convenience, the installer is also available at a short alias
+https://goo.gl/getgrpc
+
+- To install the gRPC C core (this also installs the gRPC protoc plugins for C++, Python and Ruby)
 ```sh
 $ curl -fsSL https://goo.gl/getgrpc | bash -
 ```
 - To install gRPC Python (it installs the gRPC C core if needed)
-  - Tip: This installs the grpc [python package] using pip install; you may want to
-    activate a [virtualenv][] before running this.
+  - Prequisite: The installer uses pip to install the grpc [python package][], so either
+    - [Install pip][]
+    - Activate a [virtualenv][] before running this, this should update the version of pip being used
 
 ```sh
 $ curl -fsSL https://goo.gl/getgrpc | bash -s python
@@ -50,8 +51,8 @@ Using the formulae directly
 ---------------------------
 Just `brew tap grpc/grpc` and then `brew install <formula>`.
 
-If this formula conflicts with one from Homebrew/homebrew or another tap, you
-can `brew install grpc/grpc/<formula>`.
+If the formula here conflicts with one from Homebrew/homebrew or another tap, you
+can do `brew install grpc/grpc/<formula>`.
 
 You can also install via URL:
 
@@ -71,3 +72,4 @@ Docs
 [nvm]: https://github.com/creationix/nvm
 [rvm]: https://rvm.io
 [python package]: https://pypi.python.org/pypi/grpcio
+[Install pip]: https://pip.pypa.io/en/latest/installing.html
