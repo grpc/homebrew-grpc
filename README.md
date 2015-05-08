@@ -29,15 +29,19 @@ short alias https://goo.gl/getgrpc
 $ curl -fsSL https://goo.gl/getgrpc | bash -
 ```
 - To install gRPC Python (it installs the gRPC C core if needed)
+  - Tip: This installs the grpc [python package] using pip install; you may want to
+    activate a [virtualenv][] before running this.
+
 ```sh
-$ # This installs grpcio using pip install; you may want to activate [virtualenv][] before running this
 $ curl -fsSL https://goo.gl/getgrpc | bash -s python
 ```
 - To install gRPC Node.js (it installs the gRPC C core if needed)
+  - Tip: Node needs to be available; you can install it quickly using [nvm][]
 ```sh
 $ curl -fsSL https://goo.gl/getgrpc | bash -s nodejs
 ```
 - To install gRPC Ruby (it installs the gRPC C core if needed)
+  - Tip: Ruby needs to be available; you can install it quickly using [rvm][]
 ```sh
 $ curl -fsSL https://goo.gl/getgrpc | bash -s ruby
 ```
@@ -64,3 +68,6 @@ Docs
 [linuxbrew]:https://github.com/Homebrew/linuxbrew
 [install script]:https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install
 [virtualenv]: https://virtualenv.pypa.io/en/latest/
+[nvm]: https://github.com/creationix/nvm
+[rvm]: https://rvm.io
+[python package]: https://pypi.python.org/pypi/grpcio
