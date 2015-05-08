@@ -23,11 +23,11 @@
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
         if [ "$(uname)" == "Darwin" ]; then
-            echo "Cannot find the brew command - please ensure you have installed Homebrew (http://brew.sh)";
+            echo "Cannot find the brew command - please ensure you have installed Homebrew (http://brew.sh)" 1>&2
         elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-            echo "Cannot find the brew command - please ensure you have installed Linuxbrew (https://github.com/Homebrew/linuxbrew#installation)";
+            echo "Cannot find the brew command - please ensure you have installed Linuxbrew (https://github.com/Homebrew/linuxbrew#installation)" 1>&2
         else
-            echo "Your system is neither a Mac nor Linux, so gRPC is not currently supported";
+            echo "Your system is neither a Mac nor Linux, so gRPC is not currently supported" 1>&2
         fi
         return 1;
     }
@@ -36,7 +36,7 @@ __grpc_check_for_brew() {
 __grpc_brew_install() {
     local pkg=${!#}
     if brew list -1 | grep -q "^${pkg}\$"; then
-        echo "$pkg is already installed"
+        echo "$pkg is already installed" 1>&2
         return;
     else
         brew install $@
@@ -81,34 +81,34 @@ __grpc_install_with_brew() {
 
 __grpc_install_ruby_pkg() {
     which 'ruby' >> /dev/null || {
-        echo "Could not detect ruby; is ruby installed properly? Please check $PATH and maybe install and try again";
+        echo "Could not detect ruby; is ruby installed properly? Please check $PATH and maybe install and try again" 1>&2
         return 1;
     }
     # support custom install locations: that's the default for linuxbrew and may
     # be used in homebrew install as well
-    local brew_root=$(__grpc_brew_root)
+    local brew_root=$(__grpc_brew_root) || return 1
     gem install grpc -- --with-grpc-dir=$brew_root
 }
 
 __grpc_install_nodejs_pkg() {
     which 'npm' >> /dev/null || {
-        echo "Could not detect npm; is node installed properly? Please check $PATH and maybe install and try again";
+        echo "Could not detect npm; is node installed properly? Please check $PATH and maybe install and try again" 1>&2
         return 1;
     }
     # support custom install locations: that's the default for linuxbrew and may
     # be used in homebrew install as well
-    local brew_root=$(__grpc_brew_root)
+    local brew_root=$(__grpc_brew_root) || return 1
     CXXFLAGS=-I${brew_root}/include LDFLAGS=-L${brew_root}/lib npm install --global grpc
 }
 
 __grpc_install_python_pkg() {
     which 'pip' >> /dev/null || {
-        echo "Could not detect pip; is it (and python) installed properly? Please check $PATH and maybe install and try again";
+        echo "Could not detect pip; is it (and python) installed properly? Please check $PATH and maybe install and try again" 1>&2
         return 1;
     }
     # support custom install locations, that's the default for linuxbrew and may
     # be used in homebrew install as well
-    local brew_root=$(__grpc_brew_root)
+    local brew_root=$(__grpc_brew_root) || return 1
     CFLAGS=-I${brew_root}/include LDFLAGS=-L${brew_root}/lib pip install grpcio
 }
 
@@ -122,7 +122,7 @@ __grpc_install_pkgs() {
             local cmd="__grpc_install_${pkg}_pkg";
             $cmd;
         else
-            echo "did not install package for ${pkg}; this what not known"
+            echo "did not install package for ${pkg}; it was not known" 1>&2
         fi
     done
 }
