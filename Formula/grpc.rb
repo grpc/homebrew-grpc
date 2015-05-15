@@ -19,7 +19,7 @@ class Grpc < Formula
   end
 
   def install
-    system "make", "install", "prefix=#{prefix}"
+    system "make", "install", "install_grpc_csharp_ext", "prefix=#{prefix}"
   end
 
   test do
