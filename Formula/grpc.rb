@@ -8,7 +8,6 @@ class Grpc < Formula
   version "0.6.0"
   sha256 "0671c8b264bd0b087b7699da24b4251fb998657ceb516aa672419aa709f6fb19"
 
-  depends_on "protobuf"
   depends_on "openssl"
   depends_on "pkg-config" => :build
 
