@@ -67,15 +67,16 @@ __grpc_install_with_brew() {
         }
     fi
 
+    brew tap grpc/grpc
+
     # Explicitly install protobuf.
     #
-    # We need the alpha version of protobuf, that's currently packaged a devel package, and
-    # for new we're installing the head version of gRPC
-    # install it explicitly.
-    __grpc_brew_install --devel protobuf
+    # We need version of protobuf that already has C# and objectiveC support, which haven't been released yet,
+    # so we just install HEAD for now.
+    # TODO(jtattermusch): Ideally, we should depend on the revision of protobufs we refer to in third_party/protobuf.
+    __grpc_brew_install --HEAD google-protobuf
 
     # Install gRPC
-    brew tap grpc/grpc
     __grpc_brew_install --HEAD grpc
 }
 
