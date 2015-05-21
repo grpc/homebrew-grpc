@@ -17,6 +17,8 @@ class GoogleProtobuf < Formula
   depends_on "automake" => :build
   depends_on "libtool" => :build
 
+  conflicts_with "protobuf", :because => "this formula is a customized version of protobuf formula"
+
   # this will double the build time approximately if enabled
   option "with-check", "Run build-time check"
 
