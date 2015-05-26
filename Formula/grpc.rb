@@ -19,6 +19,9 @@ class Grpc < Formula
 
   def install
     system "make", "install", "install_grpc_csharp_ext", "prefix=#{prefix}"
+    # Link the Objective-C plugin to the name protoc expects.
+    # TODO: Do this renaming on make install, for all languages.
+    bin.install_symlink bin/"grpc_objective_c_plugin" => "protoc-gen-objcgrpc"
   end
 
   test do
