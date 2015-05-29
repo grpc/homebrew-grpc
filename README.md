@@ -24,7 +24,7 @@ optionally install the gRPC package for Python, Node.Js and/or Ruby as long as
 For convenience, the installer is also available at a short alias
 https://goo.gl/getgrpc
 
-- To install the gRPC C core (this also installs the gRPC protoc plugins for C++, Python and Ruby)
+- To install the gRPC C core (this also installs the gRPC protoc plugins for C++, C#, ObjectiveC, Python and Ruby)
 ```sh
 $ curl -fsSL https://goo.gl/getgrpc | bash -
 ```
