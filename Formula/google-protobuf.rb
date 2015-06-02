@@ -3,15 +3,9 @@
 class GoogleProtobuf < Formula
   homepage "https://github.com/google/protobuf/"
   head "https://github.com/google/protobuf.git"
-  url 'https://github.com/google/protobuf/releases/download/v2.6.1/protobuf-2.6.1.tar.bz2'
-  version "2.6.1"
-  sha1 '6421ee86d8fb4e39f21f56991daa892a3e8d314b'
-
-  devel do
-    url "https://github.com/google/protobuf/archive/v3.0.0-alpha-2.tar.gz"
-    sha256 "46df8649e2a0ce736e37f8f347f92b32a9b8b54d672bf60bd8f6f4d24d283390"
-    version "3.0.0-alpha-2"
-  end
+  url 'https://github.com/google/protobuf/archive/v3.0.0-alpha-3.tar.gz'
+  version "3.0.0-alpha-3"
+  sha256 'bf90fb01b054d364d05d362d63e09d3466311e24bd6db1127dfcd88af443bf05'
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
@@ -65,7 +59,7 @@ class GoogleProtobuf < Formula
     ENV.universal_binary if build.universal?
     ENV.cxx11 if build.cxx11?
 
-    system "./autogen.sh" if build.devel? || build.head?
+    system "./autogen.sh"
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
                           "--with-zlib"
@@ -101,28 +95,17 @@ class GoogleProtobuf < Formula
   end
 
   test do
-    testdata = if devel?
+    testdata =
       <<-EOS.undent
         syntax = "proto3";
         package test;
         message TestCase {
-          optional string name = 4;
+          string name = 4;
         }
         message Test {
           repeated TestCase case = 1;
         }
         EOS
-    else
-      <<-EOS.undent
-        package test;
-        message TestCase {
-          required string name = 4;
-        }
-        message Test {
-          repeated TestCase case = 1;
-        }
-        EOS
-    end
     (testpath/"test.proto").write(testdata)
     system bin/"protoc", "test.proto", "--cpp_out=."
     system "python", "-c", "import google.protobuf" if build.with? "python"
