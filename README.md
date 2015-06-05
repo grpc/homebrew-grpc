@@ -46,6 +46,11 @@ $ curl -fsSL https://goo.gl/getgrpc | bash -s nodejs
 ```sh
 $ curl -fsSL https://goo.gl/getgrpc | bash -s ruby
 ```
+- To install gRPC PHP extension (it installs the gRPC C core if needed)
+  - Prequisite: PHP 5.5 or higher, php5-dev
+```sh
+$ curl -fsSL https://goo.gl/getgrpc | bash -s php
+```
 
 Using the formulae directly
 ---------------------------
