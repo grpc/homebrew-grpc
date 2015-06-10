@@ -29,7 +29,8 @@ https://goo.gl/getgrpc
 $ curl -fsSL https://goo.gl/getgrpc | bash -
 ```
 - To install gRPC Python (it installs the gRPC C core if needed)
-  - Prequisite: The installer uses pip to install the grpc [python package][], so either
+  - Prequisite: python-dev, and pip. The installer uses pip to install the grpc
+    [python package][], so either
     - [Install pip][]
     - Activate a [virtualenv][] before running this, this should update the version of pip being used
 
