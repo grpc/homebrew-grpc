@@ -19,6 +19,9 @@
 #
 # Install grpc python:
 #   curl -fsSL https://goo.gl/getgrpc | bash -s python
+#
+# Install grpc php:
+#   curl -fsSL https://goo.gl/getgrpc | bash -s php
 
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
@@ -45,7 +48,7 @@ __grpc_brew_install() {
 
 __grpc_brew_root() {
     __grpc_check_for_brew || return 1;
-    brew config | grep HOMEBREW_PREFIX | cut -f 2 -d' '
+    brew --prefix
 }
 
 __grpc_install_with_brew() {
@@ -109,10 +112,16 @@ __grpc_install_python_pkg() {
     CFLAGS=-I${brew_root}/include LDFLAGS=-L${brew_root}/lib pip install grpcio
 }
 
-# TODO: add __grpc_install_php_pkg
+__grpc_install_php_pkg() {
+    which 'phpize' >> /dev/null || {
+        echo "Could not detect phpize; please make sure php5-dev is installed" 1>&2
+        return 1;
+    }
+    brew install grpc-php
+}
 
 __grpc_install_pkgs() {
-    local known_pkgs="ruby python nodejs"
+    local known_pkgs="ruby python nodejs php"
     for pkg in $@; do
         if [[ "$known_pkgs" =~ "$pkg" ]]; then
             echo "installing grpc $pkg";
