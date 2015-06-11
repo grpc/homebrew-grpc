@@ -65,11 +65,11 @@ __grpc_install_with_brew() {
     # TODO: add this to the official homebrew formula
     if [ "$(uname)" != "Darwin" ]; then
         which 'unzip' >> /dev/null || {
-            brew tap homebrew/dupes
             __grpc_brew_install unzip
         }
     fi
 
+    brew tap homebrew/dupes
     brew tap grpc/grpc
 
     # Explicitly install google-protobuf
