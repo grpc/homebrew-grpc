@@ -29,7 +29,8 @@ https://goo.gl/getgrpc
 $ curl -fsSL https://goo.gl/getgrpc | bash -
 ```
 - To install gRPC Python (it installs the gRPC C core if needed)
-  - Prequisite: The installer uses pip to install the grpc [python package][], so either
+  - Prerequisite: python-dev, and pip. The installer uses pip to install the grpc
+    [python package][], so either
     - [Install pip][]
     - Activate a [virtualenv][] before running this, this should update the version of pip being used
 
@@ -47,7 +48,7 @@ $ curl -fsSL https://goo.gl/getgrpc | bash -s nodejs
 $ curl -fsSL https://goo.gl/getgrpc | bash -s ruby
 ```
 - To install gRPC PHP extension (it installs the gRPC C core if needed)
-  - Prequisite: PHP 5.5 or higher, php5-dev
+  - Prerequisite: PHP 5.5 or higher, php5-dev
 ```sh
 $ curl -fsSL https://goo.gl/getgrpc | bash -s php
 ```
