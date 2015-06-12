@@ -61,6 +61,8 @@ __grpc_install_with_brew() {
         __grpc_brew_install openssl
     fi
 
+    brew tap homebrew/dupes  # Needed for unzip and m4 (via google-protobuf)
+
     # On linux, explicitly install  unzip if it's not present, it's a protobuf dependency
     # TODO: add this to the official homebrew formula
     if [ "$(uname)" != "Darwin" ]; then
@@ -69,7 +71,6 @@ __grpc_install_with_brew() {
         }
     fi
 
-    brew tap homebrew/dupes
     brew tap grpc/grpc
 
     # Explicitly install google-protobuf
