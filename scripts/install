@@ -23,6 +23,8 @@
 # Install grpc php:
 #   curl -fsSL https://goo.gl/getgrpc | bash -s php
 
+set -e
+
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
         if [ "$(uname)" == "Darwin" ]; then
@@ -135,7 +137,7 @@ __grpc_install_pkgs() {
 }
 
 main() {
-    __grpc_check_for_brew || exit 1;
+    __grpc_check_for_brew;
     __grpc_install_with_brew;
     __grpc_install_pkgs "$@";
 }
