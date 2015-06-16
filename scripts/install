@@ -121,6 +121,12 @@ __grpc_install_php_pkg() {
         return 1;
     }
     brew install grpc-php
+    local module_dir=`brew --prefix`/opt/grpc-php
+    local default_extension_dir=`php -i 2>/dev/null | grep extension_dir | sed 's/.*=> //g'`
+    for f in $default_extension_dir/*.so
+    do
+      ln -s $f $module_dir/$(basename $f) &> /dev/null || true
+    done
 }
 
 __grpc_install_pkgs() {
