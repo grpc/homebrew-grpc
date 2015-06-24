@@ -29,11 +29,22 @@ https://goo.gl/getgrpc
 $ curl -fsSL https://goo.gl/getgrpc | bash -
 ```
 - To install gRPC Python (it installs the gRPC C core if needed)
-  - Prerequisite: python-dev, and pip. The installer uses pip to install the grpc
-    [python package][], so either
-    - [Install pip][]
-    - Activate a [virtualenv][] before running this, this should update the version of pip being used
-
+  - Prerequisite: python, [pip][] and [virtualenv][]. The installer uses pip to install
+    the grpc [python package][].
+    - (Ubuntu/Debian) Install python-dev
+    ```sh
+    $ sudo apt-get install python-dev
+    ```
+    - Install pip
+    ```sh
+    $ sudo easy_install pip
+    ```
+    - Activate a virtualenv before running the installer
+    ```sh
+    $ sudo pip install virtualenv
+    $ virtualenv venv
+    $ source venv/bin/activate
+    ```
 ```sh
 $ curl -fsSL https://goo.gl/getgrpc | bash -s python
 ```
@@ -78,4 +89,4 @@ Docs
 [nvm]: https://github.com/creationix/nvm
 [rvm]: https://rvm.io
 [python package]: https://pypi.python.org/pypi/grpcio
-[Install pip]: https://pip.pypa.io/en/latest/installing.html
+[pip]: https://pip.pypa.io/en/latest/installing.html
