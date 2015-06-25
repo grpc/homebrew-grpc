@@ -4,17 +4,17 @@
 class Grpc < Formula
   homepage "http://www.grpc.io/"
   head "https://github.com/grpc/grpc.git"
-  url "https://github.com/grpc/grpc/archive/release-0_9_0.tar.gz"
-  version "0.9.0"
-  sha256 "c7cd980f3408fbf70e249bdc894fdf379d730c7b165ed1fe796954a0eb560a3b"
+  url "https://github.com/grpc/grpc/archive/release-0_9_1.tar.gz"
+  version "0.9.1"
+  sha256 "baf4259606085501495051127504d8c496526fccaac64eff27565f4cd6234f31"
 
   depends_on "openssl"
   depends_on "pkg-config" => :build
 
   bottle do
     root_url "http://storage.googleapis.com/grpc-public/bottles"
-    sha256 "9e23cbcc4d4e9850cb608b66c44e76925f54c6d1f377dbeb64dd661c32eb67e4" => :yosemite
-    sha256 "a7cd10d66343f304600343733d47400a857356b03a22dc1dfbff91b5101463b0" => :x86_64_linux
+    # sha256 "9e23cbcc4d4e9850cb608b66c44e76925f54c6d1f377dbeb64dd661c32eb67e4" => :yosemite
+    # sha256 "a7cd10d66343f304600343733d47400a857356b03a22dc1dfbff91b5101463b0" => :x86_64_linux
   end
 
   def install

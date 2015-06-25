@@ -54,16 +54,17 @@ __grpc_brew_root() {
 }
 
 __grpc_install_with_brew() {
+    brew tap homebrew/dupes  # Needed for unzip, m4 (via google-protobuf), and zlib
+
     # Explicitly install OpenSSL.
     if [ "$(uname)" != "Darwin" ]; then
         # there may be unresolved dependency issues installing openssl using linuxbrew on macs.
         __grpc_brew_install pkg-config
-        __grpc_brew_install openssl
-    else
-        __grpc_brew_install openssl
     fi
 
-    brew tap homebrew/dupes  # Needed for unzip and m4 (via google-protobuf)
+    __grpc_brew_install zlib
+    __grpc_brew_install openssl
+
 
     # On linux, explicitly install  unzip if it's not present, it's a protobuf dependency
     # TODO: add this to the official homebrew formula
@@ -120,9 +121,9 @@ __grpc_install_php_pkg() {
         echo "Could not detect phpize; please make sure php5-dev is installed" 1>&2
         return 1;
     }
-    brew install grpc-php
+    brew install --HEAD grpc-php
     local module_dir=`brew --prefix`/opt/grpc-php
-    local default_extension_dir=`php -i 2>/dev/null | grep extension_dir | sed 's/.*=> //g'`
+    local default_extension_dir=$(php-config --extension-dir)
     for f in $default_extension_dir/*.so
     do
       ln -s $f $module_dir/$(basename $f) &> /dev/null || true
