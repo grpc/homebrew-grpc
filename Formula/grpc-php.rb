@@ -4,10 +4,10 @@
 class GrpcPhp < Formula
   desc "gRPC PHP extension"
   homepage "http://www.grpc.io/"
-  url "https://github.com/grpc/grpc/archive/release-0_9_0.tar.gz"
-  version "0.9.0"
-  sha256 "c7cd980f3408fbf70e249bdc894fdf379d730c7b165ed1fe796954a0eb560a3b"
+  head "https://github.com/grpc/grpc.git", :branch => "release-0_9"
+  version "0.9.1"
 
+  depends_on "autoconf"
   depends_on "grpc"
 
   def install
