@@ -4,9 +4,9 @@
 class Grpc < Formula
   homepage "http://www.grpc.io/"
   head "https://github.com/grpc/grpc.git"
-  url "https://github.com/grpc/grpc/archive/release-0_9_1.tar.gz"
-  version "0.9.1"
-  sha256 "baf4259606085501495051127504d8c496526fccaac64eff27565f4cd6234f31"
+  url "https://github.com/grpc/grpc/archive/release-0_10_0.tar.gz"
+  version "0.10.0"
+  sha256 "c4fbada4990ca5e322075c17ce66a311460e67c290d61796df67abd058fca8e1"
 
   depends_on "openssl"
   depends_on "pkg-config" => :build

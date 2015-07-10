@@ -4,8 +4,8 @@
 class GrpcPhp < Formula
   desc "gRPC PHP extension"
   homepage "http://www.grpc.io/"
-  head "https://github.com/grpc/grpc.git", :branch => "release-0_9"
-  version "0.9.1"
+  head "https://github.com/grpc/grpc.git", :branch => "release-0_10"
+  version "0.10.0"
 
   depends_on "autoconf"
   depends_on "grpc"
