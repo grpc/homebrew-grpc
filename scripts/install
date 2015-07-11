@@ -117,17 +117,19 @@ __grpc_install_python_pkg() {
 }
 
 __grpc_install_php_pkg() {
-    which 'phpize' >> /dev/null || {
-        echo "Could not detect phpize; please make sure php5-dev is installed" 1>&2
+    which 'php' >> /dev/null || {
+        echo "Could not detect php; please make sure php 5.5 or above is installed" 1>&2
         return 1;
     }
-    brew install --HEAD grpc-php
-    local module_dir=`brew --prefix`/opt/grpc-php
-    local default_extension_dir=$(php-config --extension-dir)
-    for f in $default_extension_dir/*.so
-    do
-      ln -s $f $module_dir/$(basename $f) &> /dev/null || true
-    done
+    # install the PHP extension via the homebrew-php tap
+    local php_version_path="$(php --version | head -1 | cut -c5-5,7-7)"
+    [[ "55 56" =~ $php_version_path ]] || {
+        echo "Please install PHP 5.5 or above... exiting"
+        return 1;
+    }
+    local formula=php${php_version_path}-grpc
+    brew tap homebrew/php
+    brew install $formula
 }
 
 __grpc_install_pkgs() {
