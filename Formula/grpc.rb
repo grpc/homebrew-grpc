@@ -10,6 +10,7 @@ class Grpc < Formula
 
   depends_on "openssl"
   depends_on "pkg-config" => :build
+  depends_on "google-protobuf"
 
   bottle do
     root_url "http://storage.googleapis.com/grpc-public/bottles"
