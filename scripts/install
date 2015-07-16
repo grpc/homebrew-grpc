@@ -128,7 +128,7 @@ __grpc_install_php_pkg() {
         return 1;
     }
     local formula=php${php_version_path}-grpc
-    brew tap homebrew/php
+    brew tap stanley-cheung/php
     brew install $formula
 }
 
