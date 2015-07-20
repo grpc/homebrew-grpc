@@ -117,19 +117,34 @@ __grpc_install_python_pkg() {
 }
 
 __grpc_install_php_pkg() {
-    which 'php' >> /dev/null || {
-        echo "Could not detect php; please make sure php 5.5 or above is installed" 1>&2
+    which 'pecl' >> /dev/null || {
+        echo "Could not detect pecl; please make sure pear and pecl are installed" 1>&2
         return 1;
     }
-    # install the PHP extension via the homebrew-php tap
-    local php_version_path="$(php --version | head -1 | cut -c5-5,7-7)"
-    [[ "55 56" =~ $php_version_path ]] || {
-        echo "Please install PHP 5.5 or above... exiting"
-        return 1;
-    }
-    local formula=php${php_version_path}-grpc
-    brew tap stanley-cheung/php
-    brew install $formula
+    # support custom install locations, that's the default for linuxbrew and may
+    # be used in homebrew install as well
+    local brew_root=$(__grpc_brew_root) || return 1
+
+    # download the gRPC PHP extension
+    pecl download grpc-alpha
+
+    # before stable, the extension will have a name of grpc-0.x.x
+    find . -name grpc-*.tgz -exec tar -zxvf {} \;
+    dir=$(find . -type d -name 'grpc-*')
+    cd $dir
+
+    # there seems to be no clean way to install the PHP extension without root access
+    # build and leave the extension in the current directory
+    phpize && ./configure --enable-grpc=${brew_root}/opt/grpc && make
+    cp ./modules/grpc.so ../
+
+    # clean up
+    cd ..
+    rm -rf $dir && rm grpc-*.tgz && rm package.xml
+    echo "Run this to install the PHP extension:"
+    echo "  sudo mv grpc.so $(php-config --extension-dir)"
+    echo "Add this line to php.ini:"
+    echo "  extension=grpc.so"
 }
 
 __grpc_install_pkgs() {
