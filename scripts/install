@@ -113,7 +113,7 @@ __grpc_install_python_pkg() {
     # support custom install locations, that's the default for linuxbrew and may
     # be used in homebrew install as well
     local brew_root=$(__grpc_brew_root) || return 1
-    CFLAGS=-I${brew_root}/include LDFLAGS=-L${brew_root}/lib pip install grpcio
+    CFLAGS=-I${brew_root}/include LDFLAGS=-L${brew_root}/lib pip install grpcio --pre
 }
 
 __grpc_install_php_pkg() {
