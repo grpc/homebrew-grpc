@@ -7,7 +7,6 @@ class GoogleProtobuf < Formula
   version "3.0.0-beta-1"
   sha256 '8590587749a9d969b277ad050f710a3dfa7816e7e44f34c953dd3730ca550850'
 
-  depends_on "m4" => :build
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "libtool" => :build
