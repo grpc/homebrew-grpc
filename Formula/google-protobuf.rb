@@ -7,6 +7,13 @@ class GoogleProtobuf < Formula
   version "3.0.0-beta-1"
   sha256 '8590587749a9d969b277ad050f710a3dfa7816e7e44f34c953dd3730ca550850'
 
+  # Fix assignment syntax error in python extension.
+  # See https://github.com/google/protobuf/pull/776
+  patch do
+    url "https://raw.githubusercontent.com/grpc/homebrew-grpc/master/patches/google_protobuf_4472b4a_Fixed-assignment-syntax-error.patch"
+    sha256 "47cbaaf7e782b09edb5dcf10ff6b7892af8f506df4d82f71877957de3552afa4"
+  end
+
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "libtool" => :build
