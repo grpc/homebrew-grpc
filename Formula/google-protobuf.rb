@@ -3,11 +3,17 @@
 class GoogleProtobuf < Formula
   homepage "https://github.com/google/protobuf/"
   head "https://github.com/google/protobuf.git"
-  url 'https://github.com/google/protobuf/archive/v3.0.0-alpha-3.tar.gz'
-  version "3.0.0-alpha-3"
-  sha256 'bf90fb01b054d364d05d362d63e09d3466311e24bd6db1127dfcd88af443bf05'
+  url 'https://github.com/google/protobuf/archive/v3.0.0-beta-1.tar.gz'
+  version "3.0.0-beta-1"
+  sha256 '8590587749a9d969b277ad050f710a3dfa7816e7e44f34c953dd3730ca550850'
 
-  depends_on "m4" => :build
+  # Fix assignment syntax error in python extension.
+  # See https://github.com/google/protobuf/pull/776
+  patch do
+    url "https://raw.githubusercontent.com/grpc/homebrew-grpc/master/patches/google_protobuf_4472b4a_Fixed-assignment-syntax-error.patch"
+    sha256 "47cbaaf7e782b09edb5dcf10ff6b7892af8f506df4d82f71877957de3552afa4"
+  end
+
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "libtool" => :build
