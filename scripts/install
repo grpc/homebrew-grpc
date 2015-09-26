@@ -25,6 +25,8 @@
 
 set -e
 
+GRPC_VERSION='0.11.0'
+
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
         if [ "$(uname)" == "Darwin" ]; then
@@ -54,7 +56,8 @@ __grpc_brew_root() {
 }
 
 __grpc_install_with_brew() {
-    brew tap homebrew/dupes  # Needed for unzip, m4 (via google-protobuf), and zlib
+    # Needed for unzip, m4 (via google-protobuf), and zlib
+    brew tap | grep -q 'homebrew/dupes' || brew tap homebrew/dupes
 
     # Explicitly install OpenSSL.
     if [ "$(uname)" != "Darwin" ]; then
@@ -74,7 +77,11 @@ __grpc_install_with_brew() {
         }
     fi
 
-    brew tap grpc/grpc
+    # Current gRPC version is already installed
+    [[ $(brew list --versions | grep grpc) =~ $GRPC_VERSION ]] && return 0
+
+    # Otherwise install the tap and install grpc
+    brew tap | grep -q 'grpc/grpc' || brew tap grpc/grpc
 
     # Explicitly install google-protobuf
     __grpc_brew_install --without-python google-protobuf
