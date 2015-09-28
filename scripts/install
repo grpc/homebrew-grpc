@@ -133,7 +133,7 @@ __grpc_install_php_pkg() {
     local brew_root=$(__grpc_brew_root) || return 1
 
     # download the gRPC PHP extension
-    pecl download grpc-alpha
+    pecl download grpc-beta
 
     # before stable, the extension will have a name of grpc-0.x.x
     find . -name grpc-*.tgz -exec tar -zxvf {} \;
