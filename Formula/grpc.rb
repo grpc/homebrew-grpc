@@ -15,8 +15,15 @@ class Grpc < Formula
   depends_on "pkg-config" => :build
   depends_on "google-protobuf"
 
+  option "without-libgrpc", "Do now install gRPC C core library, only install gRPC protoc plugins."
+
   def install
-    system "make", "install", "install_grpc_csharp_ext", "prefix=#{prefix}"
+    unless build.without? "libgrpc"
+      system "make", "install", "install_grpc_csharp_ext", "prefix=#{prefix}"
+    else
+      system "make", "install-plugins", "prefix=#{prefix}"
+    end
+
     # Link the Objective-C plugin to the name protoc expects.
     # TODO: Do this renaming on make install, for all languages.
     bin.install_symlink bin/"grpc_objective_c_plugin" => "protoc-gen-objcgrpc"
