@@ -11,6 +11,9 @@
 # Install grpc core:
 #   curl -fsSL https://goo.gl/getgrpc | bash -
 #
+# Install grpc protoc plugins only:
+#   curl -fsSL https://goo.gl/getgrpc | bash -s plugins
+#
 # Install grpc ruby:
 #   curl -fsSL https://goo.gl/getgrpc | bash -s ruby
 #
@@ -87,7 +90,7 @@ __grpc_install_with_brew() {
     __grpc_brew_install --without-python google-protobuf
 
     # Install gRPC
-    __grpc_brew_install grpc
+    __grpc_brew_install "$@" grpc
 }
 
 __grpc_install_ruby_pkg() {
@@ -169,8 +172,20 @@ __grpc_install_pkgs() {
 
 main() {
     __grpc_check_for_brew;
-    __grpc_install_with_brew;
-    __grpc_install_pkgs "$@";
+
+    local install_with_brew_args=""
+    local install_pkgs_args=""
+    for arg in "$@"; do
+      if [ "$arg" == "plugins" ]
+      then
+        install_with_brew_args+="--without-libgrpc "
+      else
+        install_pkgs_args+="$arg "
+      fi
+    done
+
+    __grpc_install_with_brew "$install_with_brew_args";
+    __grpc_install_pkgs "$install_pkgs_args";
 }
 
 main "$@"

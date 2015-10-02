@@ -14,8 +14,34 @@ Prerequisites
 - On Mac OS X, install [homebrew][].
 - On Linux, install [linuxbrew][].
 
-Quick Install
--------------
+Quick Install: Linux
+--------------------
+
+_UPDATE (9/30/2015): Linuxbrew is no longer the official way to install gRPC
+on Linux platform. You should use official Debian packages from [jessie-backports][]
+to install `libgrpc-dev`. Nevertheless, the Debian packages for the latest version
+of [protobuf][] and gRPC protoc plugins (needed to generate code for gRPC service stubs) are still work in progress and the easiest way to install them is using Linuxbrew._
+
+The repo contains an [install script][] that can be used to install gRPC protoc plugins.
+For convenience, the installer is also available at a short alias
+https://goo.gl/getgrpc
+
+- To install the gRPC protoc plugins for C++, C#, ObjectiveC, Python and Ruby
+```sh
+$ curl -fsSL https://goo.gl/getgrpc | bash -s plugins
+```
+
+- Alternatively, you can use gRPC formula directly
+```sh
+brew tap grpc/grpc
+brew install --without-libgrpc grpc
+```
+
+Quick Install: Mac OS X
+-----------------------
+
+_UPDATE (9/30/2015): Homebrew continues to be the official way how to install
+gRPC on Mac OS X._
 
 The repo contains an [install script][] that can be used to install gRPC and
 optionally install the gRPC package for Python, Node.Js and/or Ruby as long as
@@ -84,6 +110,8 @@ Docs
 [wiki]:http://wiki.github.com/Homebrew/homebrew
 [homebrew]:http://brew.sh
 [linuxbrew]:https://github.com/Homebrew/linuxbrew
+[jessie-backports]:http://backports.debian.org/Instructions/
+[protobuf]:https://github.com/google/protobuf/releases
 [install script]:https://raw.githubusercontent.com/grpc/homebrew-grpc/master/scripts/install
 [virtualenv]: https://virtualenv.pypa.io/en/latest/
 [nvm]: https://github.com/creationix/nvm
