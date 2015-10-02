@@ -15,7 +15,7 @@ class Grpc < Formula
   depends_on "pkg-config" => :build
   depends_on "google-protobuf"
 
-  option "without-libgrpc", "Do now install gRPC C core library, only install gRPC protoc plugins."
+  option "without-libgrpc", "Do not install gRPC C core library, only install gRPC protoc plugins."
 
   def install
     unless build.without? "libgrpc"
