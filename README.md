@@ -19,7 +19,7 @@ Quick Install: Linux
 
 _UPDATE (9/30/2015): Linuxbrew is no longer the official way to install gRPC
 on Linux platform. You should use official Debian packages from [jessie-backports][]
-to install `libgrpc`. Nevertheless, the Debian packages for the latest version
+to install `libgrpc-dev`. Nevertheless, the Debian packages for the latest version
 of [protobuf][] and gRPC protoc plugins (needed to generate code for gRPC service stubs) are still work in progress and the easiest way to install them is using Linuxbrew._
 
 The repo contains an [install script][] that can be used to install gRPC protoc plugins.
