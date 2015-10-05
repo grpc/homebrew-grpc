@@ -39,15 +39,17 @@ $ curl -fsSL https://goo.gl/getgrpc | bash -
     ```sh
     $ sudo easy_install pip
     ```
-    - Activate a virtualenv before running the installer
+    - Before running the install script, activate a [virtualenv][]
     ```sh
     $ sudo pip install virtualenv
     $ virtualenv venv
     $ source venv/bin/activate
     ```
-```sh
-$ curl -fsSL https://goo.gl/getgrpc | bash -s python
-```
+    - Run the installer script
+    ```sh
+    $ curl -fsSL https://goo.gl/getgrpc | bash -s python
+    ```
+
 - To install gRPC Node.js (it installs the gRPC C core if needed)
   - Tip: Node needs to be available; you can install it quickly using [nvm][]
 ```sh
