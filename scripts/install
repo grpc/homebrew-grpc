@@ -33,9 +33,13 @@ GRPC_VERSION='0.11.0'
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
         if [ "$(uname)" == "Darwin" ]; then
-            echo "Cannot find the brew command - please ensure you have installed Homebrew (http://brew.sh)" 1>&2
+            echo "Cannot find the brew command" \
+            " - please ensure you have installed Homebrew (http://brew.sh)." \
+            " If you're running this with sudo, try sudo env \"PATH=\$PATH\" instead." 1>&2
         elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-            echo "Cannot find the brew command - please ensure you have installed Linuxbrew (https://github.com/Homebrew/linuxbrew#installation)" 1>&2
+            echo "Cannot find the brew command" \
+            " - please ensure you have installed Linuxbrew (https://github.com/Homebrew/linuxbrew#installation)." \
+            " If you're running this with sudo, try sudo env \"PATH=\$PATH\" instead." 1>&2
         else
             echo "Your system is neither a Mac nor Linux, so gRPC is not currently supported" 1>&2
         fi
