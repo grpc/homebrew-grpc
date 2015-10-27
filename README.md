@@ -57,10 +57,6 @@ $ curl -fsSL https://goo.gl/getgrpc | bash -
 - To install gRPC Python (it installs the gRPC C core if needed)
   - Prerequisite: python, [pip][] and [virtualenv][]. The installer uses pip to install
     the grpc [python package][].
-    - (Ubuntu/Debian) Install python-dev
-    ```sh
-    $ sudo apt-get install python-dev
-    ```
     - Install pip
     ```sh
     $ sudo easy_install pip
