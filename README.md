@@ -44,7 +44,7 @@ _UPDATE (9/30/2015): Homebrew continues to be the official way how to install
 gRPC on Mac OS X._
 
 The repo contains an [install script][] that can be used to install gRPC and
-optionally install the gRPC package for Python, Node.Js and/or Ruby as long as
+optionally install the gRPC package for Python, and/or PHP as long as
 [homebrew][]/[linuxbrew][] is available.
 
 For convenience, the installer is also available at a short alias
@@ -72,16 +72,6 @@ $ curl -fsSL https://goo.gl/getgrpc | bash -
     $ curl -fsSL https://goo.gl/getgrpc | bash -s python
     ```
 
-- To install gRPC Node.js (it installs the gRPC C core if needed)
-  - Tip: Node needs to be available; you can install it quickly using [nvm][]
-```sh
-$ curl -fsSL https://goo.gl/getgrpc | bash -s nodejs
-```
-- To install gRPC Ruby (it installs the gRPC C core if needed)
-  - Tip: Ruby needs to be available; you can install it quickly using [rvm][]
-```sh
-$ curl -fsSL https://goo.gl/getgrpc | bash -s ruby
-```
 - To install gRPC PHP extension (it installs the gRPC C core if needed)
   - Prerequisite: PHP 5.5 or higher, php5-dev
 ```sh
