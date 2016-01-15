@@ -14,12 +14,6 @@
 # Install grpc protoc plugins only:
 #   curl -fsSL https://goo.gl/getgrpc | bash -s plugins
 #
-# Install grpc ruby:
-#   curl -fsSL https://goo.gl/getgrpc | bash -s ruby
-#
-# Install grpc nodejs:
-#   curl -fsSL https://goo.gl/getgrpc | bash -s nodejs
-#
 # Install grpc python:
 #   curl -fsSL https://goo.gl/getgrpc | bash -s python
 #
@@ -97,28 +91,6 @@ __grpc_install_with_brew() {
     __grpc_brew_install "$@" grpc
 }
 
-__grpc_install_ruby_pkg() {
-    which 'ruby' >> /dev/null || {
-        echo "Could not detect ruby; is ruby installed properly? Please check $PATH and maybe install and try again" 1>&2
-        return 1;
-    }
-    # support custom install locations: that's the default for linuxbrew and may
-    # be used in homebrew install as well
-    local brew_root=$(__grpc_brew_root) || return 1
-    gem install grpc -- --with-grpc-dir=$brew_root
-}
-
-__grpc_install_nodejs_pkg() {
-    which 'npm' >> /dev/null || {
-        echo "Could not detect npm; is node installed properly? Please check $PATH and maybe install and try again" 1>&2
-        return 1;
-    }
-    # support custom install locations: that's the default for linuxbrew and may
-    # be used in homebrew install as well
-    local brew_root=$(__grpc_brew_root) || return 1
-    CXXFLAGS=-I${brew_root}/include LDFLAGS=-L${brew_root}/lib npm install --global grpc
-}
-
 __grpc_install_python_pkg() {
     which 'pip' >> /dev/null || {
         echo "Could not detect pip; is it (and python) installed properly? Please check $PATH and maybe install and try again" 1>&2
@@ -162,7 +134,7 @@ __grpc_install_php_pkg() {
 }
 
 __grpc_install_pkgs() {
-    local known_pkgs="ruby python nodejs php"
+    local known_pkgs="python php"
     for pkg in $@; do
         if [[ "$known_pkgs" =~ "$pkg" ]]; then
             echo "installing grpc $pkg";
