@@ -19,7 +19,7 @@ class Grpc < Formula
 
   def install
     unless build.without? "libgrpc"
-      system "make", "install", "install_grpc_csharp_ext", "prefix=#{prefix}"
+      system "make", "install", "prefix=#{prefix}"
     else
       system "make", "install-plugins", "prefix=#{prefix}"
     end
