@@ -3,9 +3,9 @@
 class GoogleProtobuf < Formula
   homepage "https://github.com/google/protobuf/"
   head "https://github.com/google/protobuf.git"
-  url 'https://github.com/google/protobuf/archive/v3.0.0-beta-1.tar.gz'
-  version "3.0.0-beta-1"
-  sha256 '8590587749a9d969b277ad050f710a3dfa7816e7e44f34c953dd3730ca550850'
+  url 'https://github.com/google/protobuf/archive/v3.0.0-beta-2.tar.gz'
+  version "3.0.0-beta-2"
+  sha256 'be224d07ce87f12e362cff3df02851107bf92a4e4604349b1d7a4b1f0c3bfd86'
 
   # Fix assignment syntax error in python extension.
   # See https://github.com/google/protobuf/pull/776

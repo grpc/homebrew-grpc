@@ -1,8 +1,8 @@
 class Grpc < Formula
   desc "gRPC is the next generation open source RPC library and framework"
   homepage "http://www.grpc.io/"
-  url "https://github.com/grpc/grpc/archive/release-0_12_0.tar.gz"
-  sha256 "7331e3a708d8fb79eeed8108c1e2b212785bc7c7b9e44fd5549da10cc484915c"
+  url "https://github.com/grpc/grpc/archive/release-0_13_0.tar.gz"
+  sha256 "59eb25eaebcd6109c872f8da8b277a0a8362779af59f854e1dea851f6a70beaf"
   head "https://github.com/grpc/grpc.git"
 
   bottle do
@@ -19,7 +19,7 @@ class Grpc < Formula
 
   def install
     unless build.without? "libgrpc"
-      system "make", "install", "install_grpc_csharp_ext", "prefix=#{prefix}"
+      system "make", "install", "prefix=#{prefix}"
     else
       system "make", "install-plugins", "prefix=#{prefix}"
     end

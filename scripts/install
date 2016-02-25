@@ -22,7 +22,7 @@
 
 set -e
 
-GRPC_VERSION='0.12.0'
+GRPC_VERSION='0.13.0'
 
 __grpc_check_for_brew() {
     which 'brew' >> /dev/null || {
