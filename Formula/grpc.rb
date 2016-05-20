@@ -1,8 +1,8 @@
 class Grpc < Formula
   desc "gRPC is the next generation open source RPC library and framework"
   homepage "http://www.grpc.io/"
-  url "https://github.com/grpc/grpc/archive/release-0_13_0.tar.gz"
-  sha256 "59eb25eaebcd6109c872f8da8b277a0a8362779af59f854e1dea851f6a70beaf"
+  url "https://github.com/grpc/grpc/archive/release-0_14_0.tar.gz"
+  sha256 "da636656f20aaade8069ed21f7875ed52208ea8aa4a9c0d5671361a6b48c9cc0"
   head "https://github.com/grpc/grpc.git"
 
   bottle do
@@ -15,18 +15,24 @@ class Grpc < Formula
   depends_on "pkg-config" => :build
   depends_on "google-protobuf"
 
-  option "without-libgrpc", "Do not install gRPC C core library, only install gRPC protoc plugins."
+  option "with-plugins", "Also install gRPC protoc plugins."
 
   def install
-    unless build.without? "libgrpc"
-      system "make", "install", "prefix=#{prefix}"
-    else
-      system "make", "install-plugins", "prefix=#{prefix}"
-    end
 
-    # Link the Objective-C plugin to the name protoc expects.
-    # TODO: Do this renaming on make install, for all languages.
-    bin.install_symlink bin/"grpc_objective_c_plugin" => "protoc-gen-objcgrpc"
+    # UGLY HACK: we depend on headers from third_party/nanopb being available
+    # so we just fetch them from github ourselves.
+    # TODO(jtattermusch): find a better solution
+    system "git", "clone", "--branch=nanopb-0.3.5", "https://github.com/nanopb/nanopb.git", "third_party/nanopb"
+
+    system "make", "install", "prefix=#{prefix}"
+
+    if build.with? "plugins"
+      system "make", "install-plugins", "prefix=#{prefix}"
+
+      # Link the Objective-C plugin to the name protoc expects.
+      # TODO: Do this renaming on make install, for all languages.
+      bin.install_symlink bin/"grpc_objective_c_plugin" => "protoc-gen-objcgrpc"
+    end
   end
 
   test do
