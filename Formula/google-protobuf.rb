@@ -51,6 +51,12 @@ class GoogleProtobuf < Formula
     sha256 "47959d0651c32102c10ad919b8a0ffe0ae85f44b8457ddcf2bdc0358fb03dc29"
   end
 
+  resource "gmock" do
+    url "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/googlemock/gmock-1.7.0.zip"
+    mirror "https://dl.bintray.com/homebrew/mirror/gmock-1.7.0.zip"
+    sha256 "26fcbb5925b74ad5fc8c26b0495dfc96353f4d553492eb97e85a8a6d2f43095b"
+  end
+
   def install
     # Don't build in debug mode. See:
     # https://github.com/Homebrew/homebrew/issues/9279
@@ -59,6 +65,7 @@ class GoogleProtobuf < Formula
     ENV.universal_binary if build.universal?
     ENV.cxx11 if build.cxx11?
 
+    (buildpath/"gmock").install resource("gmock")
     system "./autogen.sh"
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
