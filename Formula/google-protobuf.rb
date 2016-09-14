@@ -3,9 +3,9 @@
 class GoogleProtobuf < Formula
   homepage "https://github.com/google/protobuf/"
   head "https://github.com/google/protobuf.git"
-  url 'https://github.com/google/protobuf/archive/v3.0.0.tar.gz'
-  version "3.0.0"
-  sha256 'f5b3563f118f1d3d6e001705fa7082e8fc3bda50038ac3dff787650795734146'
+  url 'https://github.com/google/protobuf/archive/v3.0.2.tar.gz'
+  version "3.0.2"
+  sha256 'b700647e11556b643ccddffd1f41d8cb7704ed02090af54cc517d44d912d11c1'
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
@@ -51,12 +51,6 @@ class GoogleProtobuf < Formula
     sha256 "47959d0651c32102c10ad919b8a0ffe0ae85f44b8457ddcf2bdc0358fb03dc29"
   end
 
-  resource "gmock" do
-    url "https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/googlemock/gmock-1.7.0.zip"
-    mirror "https://dl.bintray.com/homebrew/mirror/gmock-1.7.0.zip"
-    sha256 "26fcbb5925b74ad5fc8c26b0495dfc96353f4d553492eb97e85a8a6d2f43095b"
-  end
-
   def install
     # Don't build in debug mode. See:
     # https://github.com/Homebrew/homebrew/issues/9279
@@ -65,7 +59,6 @@ class GoogleProtobuf < Formula
     ENV.universal_binary if build.universal?
     ENV.cxx11 if build.cxx11?
 
-    (buildpath/"gmock").install resource("gmock")
     system "./autogen.sh"
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
