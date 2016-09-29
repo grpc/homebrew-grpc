@@ -22,7 +22,7 @@ class Grpc < Formula
     # UGLY HACK: we depend on headers from third_party/nanopb being available
     # so we just fetch them from github ourselves.
     # TODO(jtattermusch): find a better solution
-    system "git", "clone", "--branch=nanopb-0.3.5", "https://github.com/nanopb/nanopb.git", "third_party/nanopb"
+    system "[ \"$(ls -A third_party/nanopb)\" ] || git clone --branch=nanopb-0.3.5 https://github.com/nanopb/nanopb.git third_party/nanopb"
 
     system "make", "install", "prefix=#{prefix}"
 
