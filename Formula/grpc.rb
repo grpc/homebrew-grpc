@@ -19,10 +19,13 @@ class Grpc < Formula
 
   def install
 
-    # UGLY HACK: we depend on headers from third_party/nanopb being available
-    # so we just fetch them from github ourselves.
-    # TODO(jtattermusch): find a better solution
-    system "git", "clone", "--branch=nanopb-0.3.5", "https://github.com/nanopb/nanopb.git", "third_party/nanopb"
+    # Clone nanopb into third_party/nanopb IF THE DIRECTORY IS EMPTY.
+    # gRPC v1.0 has nanopb as a submodule of grpc, which requires a clone
+    # of nanopb into the directory. gRPC Master removed the submodule and
+    # always have nanopb files in place, in which case a clone would give
+    # error.
+    # TODO(mxyan): find a better solution
+    system "[ \"$(ls -A third_party/nanopb)\" ] || git clone --branch=nanopb-0.3.5 https://github.com/nanopb/nanopb.git third_party/nanopb"
 
     system "make", "install", "prefix=#{prefix}"
 
