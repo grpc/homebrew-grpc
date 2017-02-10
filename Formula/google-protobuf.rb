@@ -3,9 +3,9 @@
 class GoogleProtobuf < Formula
   homepage "https://github.com/google/protobuf/"
   head "https://github.com/google/protobuf.git"
-  url 'https://github.com/google/protobuf/archive/v3.0.2.tar.gz'
-  version "3.0.2"
-  sha256 'b700647e11556b643ccddffd1f41d8cb7704ed02090af54cc517d44d912d11c1'
+  url 'https://github.com/google/protobuf/archive/v3.1.0.tar.gz'
+  version "3.1.0"
+  sha256 '0a0ae63cbffc274efb573bdde9a253e3f32e458c41261df51c5dbc5ad541e8f7'
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
