@@ -11,7 +11,7 @@ class Grpc < Formula
 
   depends_on "openssl"
   depends_on "pkg-config" => :build
-  depends_on "google-protobuf"
+  depends_on "protobuf"
 
   option "with-plugins", "Also install gRPC protoc plugins."
 
@@ -25,7 +25,12 @@ class Grpc < Formula
     # TODO(mxyan): find a better solution
     system "[ \"$(ls -A third_party/nanopb)\" ] || git clone --branch=nanopb-0.3.5 https://github.com/nanopb/nanopb.git third_party/nanopb"
 
-    system "make", "install", "prefix=#{prefix}"
+    if OS.linux?
+      # http://www.linuxquestions.org/questions/programming-9/usr-bin-ld-failed-to-set-dynamic-section-sizes-file-truncated-4175553982/
+      system "make", "-j1", "install", "prefix=#{prefix}"
+    else
+      system "make", "install", "prefix=#{prefix}"
+    end
 
     if build.with? "plugins"
       system "make", "install-plugins", "prefix=#{prefix}"
