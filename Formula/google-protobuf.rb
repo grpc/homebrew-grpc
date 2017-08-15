@@ -22,9 +22,9 @@ class GoogleProtobuf < Formula
   option "without-python", "Build without python support"
   depends_on :python => :recommended if MacOS.version <= :snow_leopard
 
-  fails_with :llvm do
-    build 2334
-  end
+#   fails_with :llvm do
+#     build 2334
+#   end
 
   resource "setuptools" do
     url "https://pypi.python.org/packages/source/s/setuptools/setuptools-18.7.1.tar.gz"
