@@ -1,3 +1,4 @@
 {
-  "grpc": "homebrew/core"
+  "grpc": "homebrew/core",
+  "google-protobuf": "homebrew/core/protobuf"
 }
